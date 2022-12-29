@@ -1,0 +1,25 @@
+.Card {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    text-align: center;
+    background-color: antiquewhite;
+}
+.month {
+    width: 100%;
+    font-size: 15px;
+    /* text-align: center; */
+    background-color: red;
+}
+.day {
+    flex: auto;
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 40px;
+    /* text-align: center; */
+    background-color: white;
+}

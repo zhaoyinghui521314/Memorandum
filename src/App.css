@@ -1,0 +1,56 @@
+.All {
+    width: 500px;
+    padding: 10px;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: rgb(238, 238, 219);
+}
+
+.Item {
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: rgb(210, 139, 33);
+}
+
+.Card {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+    background-color: antiquewhite;
+}
+.month {
+    width: 100%;
+    font-size: 15px;
+    /* text-align: center; */
+    background-color: red;
+}
+.day {
+    flex: auto;
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 40px;
+    /* text-align: center; */
+    background-color: white;
+}
+
+.Content {
+    flex: auto;
+    text-align: center;
+}
+.context {
+    font-weight: bold;
+    margin: 5px 0;
+}
+.min {
+    font-size: 15px;
+    color: red;
+}

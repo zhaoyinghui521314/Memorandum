@@ -1,0 +1,35 @@
+.Content {
+    position: relative;
+    flex: auto;
+    text-align: center;
+}
+.context {
+    font-weight: bold;
+    margin: 5px 0;
+}
+.min {
+    font-size: 15px;
+    color: red;
+}
+.btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    line-height: 23px;
+    border-radius: 50%;
+    rotate: 45deg;
+    background-color: rgb(214, 216, 217);
+    cursor: pointer;
+}
+.btn:hover {
+    color: red;
+}
+.btn:focus {
+    background-color: yellow;
+}
+.btn:active {
+    background-color: rgb(80, 141, 188);
+}

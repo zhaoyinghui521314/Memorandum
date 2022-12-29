@@ -1,0 +1,43 @@
+:root {
+    --a: rgba(255,0,0,.5);
+}
+
+
+.Confirm {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+    background-color: antiquewhite;
+}
+.test {
+    position:absolute;
+    /* z-index:999; */
+    z-index: -100;
+    background: var(--a);
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;  
+}
+.content {
+    height: 120px;
+    line-height: 120px;
+    font-size: 20px;
+    font-weight: bold;
+    color:brown;
+}
+.confirm-btn {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+.confirm-btn button {
+    margin: 0 10px;
+}

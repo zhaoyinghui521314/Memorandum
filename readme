@@ -1,0 +1,12 @@
+1. 初始化仓库，并引入react, react-dom, react-scripts
+
+2. 创建index.html, index.js作为入口, 创建react根节点root，并渲染对应的组件信息
+
+3. 打包npx react-scripts build执行打包，打包生成的index.html(需要在打包的html修改路径，服务器是内置的，加上'./'访问js文件)
+   或者直接运行npx react-scripts start在内置服务器上面，可以动态监听修改的内容
+
+4. 将指令加入package.json当中添加快捷键
+
+5. npm start在内置服务器上面，启动内置端口上面的服务器运行
+
+6. 后台端口使用的是Strapi项目
