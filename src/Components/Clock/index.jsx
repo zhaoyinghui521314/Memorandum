@@ -1,8 +1,6 @@
-import { isNumber, now } from "lodash";
 import { useEffect, useState } from "react";
 import MyNumber from '../Number/index';
 import Wrapper from "../UI/Border";
-// import Card from "../Card";
 import './index.css';
 
 const dateTostring = (nowDate) => {
@@ -15,7 +13,7 @@ const dateTostring = (nowDate) => {
     return `${hourString}:${minString}`;
 }
 
-const Clock = () => {
+const useGetTimeString = () => {
     const [timeString, setTimeString] = useState(dateTostring(new Date()));
     const [date, setDate] = useState(new Date());
     useEffect(() => {
@@ -30,6 +28,11 @@ const Clock = () => {
             clearTimeout(timer);
         }
     }, [date])
+    return timeString;
+}
+
+const Clock = () => {
+    const timeString = useGetTimeString();
     const timeArray = timeString.split('');
     console.log("timeArray:", timeArray);
     const timeSpan = timeArray.map(item => {
