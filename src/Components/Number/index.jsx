@@ -16,7 +16,7 @@ const MyNumber = (props) => {
     // }, [props.number])
 
     const { number } = props;
-    const top = Number(number)*80;
+    const top = numberReg.test(props.number) ? Number(number)*80 : 0;
 
     const numberListSpan = numberList.map((item, i) => <span key={i}>{item}</span>);
     return (
