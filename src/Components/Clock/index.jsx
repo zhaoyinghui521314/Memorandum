@@ -33,8 +33,7 @@ const Clock = () => {
     const timeArray = timeString.split('');
     console.log("timeArray:", timeArray);
     const timeSpan = timeArray.map(item => {
-        console.log("number transform:", Number(item));
-        return <MyNumber number={Number(item)}></MyNumber>;
+        return <MyNumber number={item}></MyNumber>;
     }
     )
     return (
