@@ -3,6 +3,7 @@ import Item from '../Item';
 import Wrapper from '../UI/Border';
 import Form from '../Form';
 import Clock from '../Clock';
+import Show from '../Show';
 import './index.css';
 import axios from '../../Api/request';
 
@@ -195,6 +196,7 @@ const Table = () => {
     console.log("id:", id);
     return (
         <div>
+            <Show />
             <Clock />
             <Form id={id} add={add} />
             <Wrapper className='table'>
