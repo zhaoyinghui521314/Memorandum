@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Item from '../Item';
 import Wrapper from '../UI/Border';
 import Form from '../Form';
@@ -6,6 +6,7 @@ import Clock from '../Clock';
 import Show from '../Show';
 import './index.css';
 import axios from '../../Api/request';
+import './index.css';
 
 const d = [
     {
@@ -129,6 +130,25 @@ const Table = () => {
     const [data, setData] = useState([]);
     console.log("useQueryx:", loading, error, fetchdata);
 
+    // Clock吸顶
+    const [isFixed, setIsFixed] = useState(false);
+    const formRef = useRef(null);
+    const scroll = () => {
+        const { top } = formRef.current.getBoundingClientRect();
+        setIsFixed(top < 120);
+    }
+
+    useEffect(() => {
+        // console.log("formRefFixed:", formRef.current);
+        // const { top } = formRef.current.getBoundingClientRect()
+        // console.log("topFixed:", top);
+        window.addEventListener("scroll", scroll);
+        return () => {
+            console.log("remove scroll");
+            window.removeEventListener(scroll);
+        }
+    }, [])
+
 
     useEffect(() => {
         fetchData();
@@ -195,10 +215,10 @@ const Table = () => {
     // console.log("data3", d, typeof(d[1].date));
     console.log("id:", id);
     return (
-        <div>
+        <div className='allWrapper'>
             <Show />
-            <Clock />
-            <Form id={id} add={add} />
+            <Clock isFixed={isFixed}/>
+            <Form ref={formRef} isFixed={isFixed} id={id} add={add} />
             <Wrapper className='table'>
                 {loading && loadingItem}
                 {error && errorItem}

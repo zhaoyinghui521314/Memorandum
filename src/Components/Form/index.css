@@ -4,6 +4,9 @@
     margin: 20px auto;
     background-color:rgb(238, 238, 219);
 }
+.fixedTop {
+    margin-top: 120px;
+}
 .formItem {
     display: flex;
     height: 40px;

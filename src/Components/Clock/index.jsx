@@ -31,7 +31,9 @@ const useGetTimeString = () => {
     return timeString;
 }
 
-const Clock = () => {
+const Clock = (props) => {
+    const { isFixed } = props;
+    console.log("isFixed:", isFixed);
     const timeString = useGetTimeString();
     const timeArray = timeString.split('');
     console.log("timeArray:", timeArray);
@@ -40,7 +42,7 @@ const Clock = () => {
     }
     )
     return (
-        <Wrapper className={'clock'}>   
+        <Wrapper className={`clock ${isFixed ? 'fixed' : ''}`}>   
             {timeSpan}
         </Wrapper>
     )

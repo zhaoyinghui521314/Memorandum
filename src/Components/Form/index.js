@@ -25,7 +25,8 @@ const useDebounce = (value, time) => {
     return dd;
 }
 
-const Form = (props) => {
+const Form = React.forwardRef((props, ref) => {
+    console.log("formRef1", ref);
     const [data, setData] = useState({date: '', context: '', min: ''});
     console.log("data", data);
     const log = useCallback(debounce((v) => {console.log("延时", v);}, 3000), []);
@@ -87,7 +88,7 @@ const Form = (props) => {
         setData({date: '', context: '', min: ''});
     }
     return (
-        <Wrapper className="form">
+        <Wrapper ref={ref} className={`form ${props.isFixed ? 'fixedTop': ''}`}>
           <form>
             <div className='formItem'>
                 <label htmlFor="date">日期:</label>
@@ -107,6 +108,6 @@ const Form = (props) => {
           </form>
         </Wrapper>
     )
-}
+})
 
 export default Form;
