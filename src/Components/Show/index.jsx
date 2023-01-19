@@ -1,11 +1,12 @@
+import Wrapper from '../UI/Border';
 import showImage from '../../Source/bizhi.jpg';
 import './index.css';
 
 const Show = () => {
     return (
-        <div className='show'>
+        <Wrapper className='show'>
             <img src={showImage} alt="showImage" />
-        </div>
+        </Wrapper>
     )
 }
 
