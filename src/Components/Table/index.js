@@ -73,6 +73,32 @@ const useQuery = () => {
     }
 }
 
+/**
+ * 封装组件吸顶的方法
+ * @returns isFixe吸顶的组件状态，formRef判断何时吸顶的组件
+ */
+const useCeiling = () => {
+    // Clock吸顶
+    const [isFixed, setIsFixed] = useState(false);
+    const formRef = useRef(null);
+    const scroll = () => {
+        const { top } = formRef.current.getBoundingClientRect();
+        setIsFixed(top < 120);
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", scroll);
+        return () => {
+            console.log("remove scroll");
+            window.removeEventListener(scroll);
+        }
+    }, [])
+    return {
+        isFixed,
+        formRef
+    }
+}
+
 const Table = () => {
     // console.log("data1", d, typeof(d[1].date));
     useEffect(() => {
@@ -130,25 +156,7 @@ const Table = () => {
     const [data, setData] = useState([]);
     console.log("useQueryx:", loading, error, fetchdata);
 
-    // Clock吸顶
-    const [isFixed, setIsFixed] = useState(false);
-    const formRef = useRef(null);
-    const scroll = () => {
-        const { top } = formRef.current.getBoundingClientRect();
-        setIsFixed(top < 120);
-    }
-
-    useEffect(() => {
-        // console.log("formRefFixed:", formRef.current);
-        // const { top } = formRef.current.getBoundingClientRect()
-        // console.log("topFixed:", top);
-        window.addEventListener("scroll", scroll);
-        return () => {
-            console.log("remove scroll");
-            window.removeEventListener(scroll);
-        }
-    }, [])
-
+    const { isFixed, formRef } = useCeiling();
 
     useEffect(() => {
         fetchData();
