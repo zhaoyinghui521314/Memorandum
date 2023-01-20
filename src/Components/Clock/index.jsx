@@ -37,8 +37,8 @@ const Clock = (props) => {
     const timeString = useGetTimeString();
     const timeArray = timeString.split('');
     console.log("timeArray:", timeArray);
-    const timeSpan = timeArray.map(item => {
-        return <MyNumber number={item}></MyNumber>;
+    const timeSpan = timeArray.map((item, i) => {
+        return <MyNumber key={i} number={item}></MyNumber>;
     }
     )
     return (
