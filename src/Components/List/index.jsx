@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Wrapper from "../UI/Border";
 import Item from "../Item";
+import Header from "../Header";
 
 /**
  * 封装查询的方式：包括加载、失败的状态
@@ -82,6 +83,7 @@ const List = (props) => {
 
     return (
         <Wrapper className='table'>
+            <Header />
             {loading && loadingItem}
             {error && errorItem}
             {tableItem.length ? tableItem : noItem}
