@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Wrapper from "../UI/Border";
 import Item from "../Item";
@@ -46,10 +46,19 @@ const List = (props) => {
     const name = ['早上', '中午', '晚上'];
     const { loading, error, da: fetchdata, fetchData} = useQuery();
     const [data, setData] = useState([]);
+    const map = useRef(new Map());
     const tableItem = data?.map((item, i) =>  {
         return (
             <div>
-                {i % 3 == 0  && <div className='time'>{name[i/3]}</div>}
+                {i % 3 == 0  && <div ref={(node) => {
+                    console.log("node i:", node, i);
+                    if(node) {
+                        map.current.set(i, node);
+                    }else {
+                        map.current.delete(i);
+                    }
+                    console.log("node ok:", map);
+                }} className='time'>{name[i/3]}</div>}
                 <Item {...item} key={item.id} del={() => del(item.id)}/>
             </div>
         )
@@ -83,7 +92,7 @@ const List = (props) => {
 
     return (
         <Wrapper className='table'>
-            <Header />
+            <Header map={map.current}/>
             {loading && loadingItem}
             {error && errorItem}
             {tableItem.length ? tableItem : noItem}
