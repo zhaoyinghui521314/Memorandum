@@ -43,17 +43,24 @@ import './index.css';
     }
 }
 
-const useGetScrollNumber = (allRef, midRef, l) => {
-    console.log("useGetScrollNumber:", allRef, midRef, l);
+/**
+ * 
+ * @param {*} allRef 列表的ref,查询用的
+ * @param {*} midRef 标杆的ref,到这个刻度
+ * @param {*} map 制作好的map
+ * @returns 返回哪个刻度
+ */
+const useGetScrollNumber = (allRef, midRef, map) => {
+    console.log("useGetScrollNumber:", allRef, midRef, map, map.length);
     const [scrollNumber, setScrollNumber] = useState(0);
     const scrollFun = (t) => {
         // 1: ref callback => map
-        // for(const [k, v] of map.current) {
-        //     const { top: topTime } = v.getBoundingClientRect();
-        //     if(topTime < t) {
-        //         setScrollNumber(k/3);
-        //     }
-        // }
+        for(const [k, v] of map.current) {
+            const { top: topTime } = v.getBoundingClientRect();
+            if(topTime < t) {
+                setScrollNumber(k/3);
+            }
+        }
 
         // 2: ref => querySelectorAll
         const node = allRef.current.querySelectorAll('.time'); 
@@ -64,14 +71,15 @@ const useGetScrollNumber = (allRef, midRef, l) => {
         //         setScrollNumber(i);
         //     }
         // })
-        for(let i = node.length - 1; i >= 0; i--) {
-            const { top: topTime } = node[i].getBoundingClientRect();
-            if(topTime < t) {
-                setScrollNumber(i);
-                // 优化性能！
-                break;
-            }
-        }
+
+        // for(let i = node.length - 1; i >= 0; i--) {
+        //     const { top: topTime } = node[i].getBoundingClientRect();
+        //     if(topTime < t) {
+        //         setScrollNumber(i);
+        //         // 优化性能！
+        //         break;
+        //     }
+        // }
     }
     useEffect(() => {
         const { top: topMid } = midRef.current.getBoundingClientRect();
@@ -79,9 +87,10 @@ const useGetScrollNumber = (allRef, midRef, l) => {
         console.log("topMid:", topMid, test);
         window.addEventListener("scroll", () => scrollFun(topMid));
         return () => {
+            console.log("scoll leave");
             window.removeEventListener("scroll",  () => scrollFun(topMid));
         }
-    }, [l])
+    }, [])
     return {scrollNumber};
 }
 
@@ -112,8 +121,8 @@ const List = (props) => {
 
     const midRef = useRef(null);
     const allRef =  useRef(null);
-    const { scrollNumber } = useGetScrollNumber(allRef, midRef, tableItem.length);
-    
+    const { scrollNumber } = useGetScrollNumber(allRef, midRef, map);
+
     useEffect(() => {
         fetchData();
     }, [])
