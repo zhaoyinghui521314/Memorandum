@@ -43,6 +43,48 @@ import './index.css';
     }
 }
 
+const useGetScrollNumber = (allRef, midRef, l) => {
+    console.log("useGetScrollNumber:", allRef, midRef, l);
+    const [scrollNumber, setScrollNumber] = useState(0);
+    const scrollFun = (t) => {
+        // 1: ref callback => map
+        // for(const [k, v] of map.current) {
+        //     const { top: topTime } = v.getBoundingClientRect();
+        //     if(topTime < t) {
+        //         setScrollNumber(k/3);
+        //     }
+        // }
+
+        // 2: ref => querySelectorAll
+        const node = allRef.current.querySelectorAll('.time'); 
+        // 从前往后，依次都要进行set消耗性能,
+        // node.forEach((item, i) => {
+        //     const { top: topTime } = item.getBoundingClientRect();
+        //     if(topTime < t) {
+        //         setScrollNumber(i);
+        //     }
+        // })
+        for(let i = node.length - 1; i >= 0; i--) {
+            const { top: topTime } = node[i].getBoundingClientRect();
+            if(topTime < t) {
+                setScrollNumber(i);
+                // 优化性能！
+                break;
+            }
+        }
+    }
+    useEffect(() => {
+        const { top: topMid } = midRef.current.getBoundingClientRect();
+        const test = midRef.current.querySelectorAll('span');
+        console.log("topMid:", topMid, test);
+        window.addEventListener("scroll", () => scrollFun(topMid));
+        return () => {
+            window.removeEventListener("scroll",  () => scrollFun(topMid));
+        }
+    }, [l])
+    return {scrollNumber};
+}
+
 const List = (props) => {
     const name = ['早上', '中午', '晚上'];
     const { loading, error, da: fetchdata, fetchData} = useQuery();
@@ -69,37 +111,9 @@ const List = (props) => {
     const errorItem =  <div>error</div>;
 
     const midRef = useRef(null);
-    const all = useRef(null);
-    const [scrollNumber, setScrollNumber] = useState(0);
-    const scrollFun = (t) => {
-        // 1: ref callback => map
-        // for(const [k, v] of map.current) {
-        //     const { top: topTime } = v.getBoundingClientRect();
-        //     if(topTime < t) {
-        //         setScrollNumber(k/3);
-        //     }
-        // }
-
-        // 2: ref => querySelectorAll
-        const node = all.current.querySelectorAll('.time'); 
-        node.forEach((item, i) => {
-            const { top: topTime } = item.getBoundingClientRect();
-            if(topTime < t) {
-                setScrollNumber(i);
-            }
-        })
-    }
-
-    useEffect(() => {
-        const { top: topMid } = midRef.current.getBoundingClientRect();
-        const test = midRef.current.querySelectorAll('span');
-        console.log("topMid:", topMid, test);
-        window.addEventListener("scroll", () => scrollFun(topMid));
-        return () => {
-            window.removeEventListener("scroll",  () => scrollFun(topMid));
-        }
-    }, [tableItem.length])
-
+    const allRef =  useRef(null);
+    const { scrollNumber } = useGetScrollNumber(allRef, midRef, tableItem.length);
+    
     useEffect(() => {
         fetchData();
     }, [])
@@ -125,11 +139,11 @@ const List = (props) => {
 
 
     return (
-        <Wrapper ref={all} className='table'>
+        <Wrapper className='table'>
             <Header map={map.current} number={scrollNumber}/>
             {loading && loadingItem}
             {error && errorItem}
-            <div ref={all}>
+            <div ref={allRef}>
                 {tableItem.length ? tableItem : noItem}
             </div>
             <div className="mid" ref={midRef}>
