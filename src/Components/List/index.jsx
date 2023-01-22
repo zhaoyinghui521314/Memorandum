@@ -3,6 +3,7 @@ import axios from "axios";
 import Wrapper from "../UI/Border";
 import Item from "../Item";
 import Header from "../Header";
+import './index.css';
 
 /**
  * 封装查询的方式：包括加载、失败的状态
@@ -67,6 +68,38 @@ const List = (props) => {
     const loadingItem = <div>loading</div>;
     const errorItem =  <div>error</div>;
 
+    const midRef = useRef(null);
+    const all = useRef(null);
+    const [scrollNumber, setScrollNumber] = useState(0);
+    const scrollFun = (t) => {
+        // 1: ref callback => map
+        // for(const [k, v] of map.current) {
+        //     const { top: topTime } = v.getBoundingClientRect();
+        //     if(topTime < t) {
+        //         setScrollNumber(k/3);
+        //     }
+        // }
+
+        // 2: ref => querySelectorAll
+        const node = all.current.querySelectorAll('.time'); 
+        node.forEach((item, i) => {
+            const { top: topTime } = item.getBoundingClientRect();
+            if(topTime < t) {
+                setScrollNumber(i);
+            }
+        })
+    }
+
+    useEffect(() => {
+        const { top: topMid } = midRef.current.getBoundingClientRect();
+        const test = midRef.current.querySelectorAll('span');
+        console.log("topMid:", topMid, test);
+        window.addEventListener("scroll", () => scrollFun(topMid));
+        return () => {
+            window.removeEventListener("scroll",  () => scrollFun(topMid));
+        }
+    }, [tableItem.length])
+
     useEffect(() => {
         fetchData();
     }, [])
@@ -90,12 +123,19 @@ const List = (props) => {
         props.setId(dealData.length);
     }, [fetchdata])
 
+
     return (
-        <Wrapper className='table'>
-            <Header map={map.current}/>
+        <Wrapper ref={all} className='table'>
+            <Header map={map.current} number={scrollNumber}/>
             {loading && loadingItem}
             {error && errorItem}
-            {tableItem.length ? tableItem : noItem}
+            <div ref={all}>
+                {tableItem.length ? tableItem : noItem}
+            </div>
+            <div className="mid" ref={midRef}>
+                <span> 滑动窗口:</span>
+                <span style={{color: 'red', fontWeight: 'bold'}}> {scrollNumber}</span>
+            </div>
         </Wrapper>
     )
 }

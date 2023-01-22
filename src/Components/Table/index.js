@@ -24,7 +24,7 @@ const useCeiling = () => {
         window.addEventListener("scroll", scroll);
         return () => {
             console.log("remove scroll");
-            window.removeEventListener(scroll);
+            window.removeEventListener("scroll", scroll);
         }
     }, [])
     return {
@@ -76,6 +76,7 @@ const Table = () => {
             <Clock isFixed={isFixed}/>
             <Form ref={formRef} isFixed={isFixed} id={id} add={add} />
             <List setId={setId}/>
+            <Show />
         </div>
     )
 }
