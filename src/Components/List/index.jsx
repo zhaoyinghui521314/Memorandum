@@ -156,8 +156,8 @@ const List = (props) => {
                 {tableItem.length ? tableItem : noItem}
             </div>
             <div className="mid" ref={midRef}>
-                <span> 滑动窗口:</span>
-                <span style={{color: 'red', fontWeight: 'bold'}}> {scrollNumber}</span>
+                {/* <span> 滑动窗口:</span> */}
+                {/* <span style={{color: 'red', fontWeight: 'bold'}}> {scrollNumber}</span> */}
             </div>
         </Wrapper>
     )
