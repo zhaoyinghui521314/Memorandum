@@ -106,9 +106,11 @@ const useGetWindowSize = () => {
         '--color': 'pink'
     });
     const handleWindowSize = (e) => {
-        console.log("ee:", e.target.innerWidth, e.target.innerHeight);
+        let htmlClientWidth = document.documentElement.clientWidth;
+        // document.documentElement不包含滚动条, window.target.innerWidth包含滚动条
+        console.log("ee:", e, e.target.innerWidth, e.target.innerHeight);
         setWindowSize({
-            '--windowSize':  `${e.target.innerWidth*0.88}px`,
+            '--windowSize':  `${htmlClientWidth*0.9}px`,
             '--color': 'pink'
         });
     }
