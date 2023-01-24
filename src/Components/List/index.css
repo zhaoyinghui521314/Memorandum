@@ -89,3 +89,14 @@
         transform: translateY(-50%) scale(0) translateX(var(--windowSize, 88vw));
     }
 }
+.time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    background-color: rgb(43, 43, 100);
+    border-radius: 6px;
+}

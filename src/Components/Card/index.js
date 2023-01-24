@@ -4,7 +4,7 @@ import './index.css';
 const Card = (props) => {
     const { date } = props;
     // console.log("Card date:", date);
-    const [_, month, day] = date.split("-");
+    const [_, month, day] = (date ? date : "").split("-");
     // console.log("Card:", date, month, day);
     // const month = props.date.getMonth();
     // const day = props.date.getDate();

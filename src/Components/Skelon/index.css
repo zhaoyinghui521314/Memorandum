@@ -1,0 +1,27 @@
+.skelon {
+    animation: skelon 3s infinite;
+}
+@keyframes skelon {
+    50% {
+        opacity: 0.6;
+    }
+}
+.skelon .Item {
+    background-color: gray;
+}
+.skelon .day {
+    background-color: rgb(144, 140, 140);
+}
+.skelon .btn {
+    background-color:rgb(144, 140, 140); 
+} 
+.skelonTime {
+    width: 100%;
+    height: 25px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    background-color: gray;
+}
+
+
+

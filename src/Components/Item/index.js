@@ -3,6 +3,7 @@ import Card from '../Card';
 import Content from '../Content';
 import Wrapper from '../UI/Border';
 import Confirm from '../UI/Confirm';
+import Skelon from '../Skelon';
 import './index.css';
 
 const Item = (props) => {

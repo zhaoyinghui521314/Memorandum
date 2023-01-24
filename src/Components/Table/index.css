@@ -7,14 +7,3 @@
     margin: 0 auto;
     background-color: rgb(238, 238, 219);
 }
-.time {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    color: red;
-    background-color: rgb(43, 43, 100);
-    border-radius: 6px;
-}

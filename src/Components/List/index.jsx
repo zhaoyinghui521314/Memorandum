@@ -3,6 +3,7 @@ import axios from "axios";
 import Wrapper from "../UI/Border";
 import Item from "../Item";
 import Header from "../Header";
+import Skelon from "../Skelon";
 import './index.css';
 
 /**
@@ -22,7 +23,7 @@ import './index.css';
             const res = await axios.get('http://localhost:1337/api/tests');
             if(res.status === 200) {
                 console.log("axios res:", res);
-                setData(res.data.data);
+                    setData(res.data.data);
             }else{
                 throw new Error("Fetch Data Error!");
             }
@@ -31,7 +32,9 @@ import './index.css';
             console.log("Catch error:", e);
             setError(e);
         }finally{
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 6000)
         }
     }
 
@@ -174,16 +177,17 @@ const List = (props) => {
     return (
         <div>
             <Wrapper className='table'>
-            <Header map={map.current} number={scrollNumber}/>
-            {loading && loadingItem}
-            {error && errorItem}
-            <div ref={allRef}>
-                {tableItem.length ? tableItem : noItem}
-            </div>
-            <div style={{...windowSize, '--test': 'blue'}} className="mid" ref={midRef}>
-                <span style={{color: 'red', marginTop: '10px', display: "inline-block"}}> 滑动窗口:</span>
-                <span style={{color: 'red', fontWeight: 'bold'}}> {scrollNumber}</span>
-            </div>
+                
+                <Header map={map.current} number={scrollNumber}/>
+                {loading && <Skelon />}
+                {error && errorItem}
+                <div ref={allRef}>
+                    {!loading && (tableItem.length ? tableItem : noItem)}
+                </div>
+                <div style={{...windowSize, '--test': 'blue'}} className="mid" ref={midRef}>
+                    <span style={{color: 'red', marginTop: '10px', display: "inline-block"}}> 滑动窗口:</span>
+                    <span style={{color: 'red', fontWeight: 'bold'}}> {scrollNumber}</span>
+                </div>
             </Wrapper>
         </div>
     )
