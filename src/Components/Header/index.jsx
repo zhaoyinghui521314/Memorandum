@@ -24,7 +24,7 @@ const Header = (props) => {
         return (
                 <li onClick={toggleHandle(index)} className='li'>
                     {name[index]}
-                    <span className={`line ${line == index && 'lineShow'}`}></span>
+                    <span key={index} className={`line ${line == index && 'lineShow'}`}></span>
                 </li>
         )
     })

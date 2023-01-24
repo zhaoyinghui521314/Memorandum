@@ -5,7 +5,7 @@ const Wrapper = React.forwardRef((props, ref) => {
     // console.log("name", props.className);
     console.log("formRef2", ref);
     return (
-        <div ref={ref} className={`Wrapper ${props.className}`} onClick={props.onClick}>
+        <div ref={ref} style={props.style} className={`Wrapper ${props.className}`} onClick={props.onClick}>
             {props.children}
         </div>
     )

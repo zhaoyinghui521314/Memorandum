@@ -94,6 +94,30 @@ const useGetScrollNumber = (allRef, midRef, map) => {
     return {scrollNumber};
 }
 
+/**
+ * 
+ * @returns 实时监听返回当前窗口的长度
+ */
+const useGetWindowSize = () => {
+    const [windowSize, setWindowSize] = useState({
+        '--color': 'pink'
+    });
+    const handleWindowSize = (e) => {
+        console.log("ee:", e.target.innerWidth, e.target.innerHeight);
+        setWindowSize({
+            '--windowSize':  `${e.target.innerWidth*0.88}px`,
+            '--color': 'pink'
+        });
+    }
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSize);
+        return () => {
+            window.removeEventListener('resize', handleWindowSize);
+        }
+    }, []);
+    return {windowSize};
+}
+
 const List = (props) => {
     const name = ['早上', '中午', '晚上'];
     const { loading, error, da: fetchdata, fetchData} = useQuery();
@@ -102,7 +126,7 @@ const List = (props) => {
     const tableItem = data?.map((item, i) =>  {
         return (
             <div>
-                {i % 3 == 0  && <div ref={(node) => {
+                {i % 3 == 0  && <div key={i} ref={(node) => {
                     console.log("node i:", node, i);
                     if(node) {
                         map.current.set(i, node);
@@ -122,7 +146,8 @@ const List = (props) => {
     const midRef = useRef(null);
     const allRef =  useRef(null);
     const { scrollNumber } = useGetScrollNumber(allRef, midRef, map);
-
+    const { windowSize } = useGetWindowSize();
+    console.log("ee windowSize:", windowSize);
     useEffect(() => {
         fetchData();
     }, [])
@@ -146,20 +171,21 @@ const List = (props) => {
         props.setId(dealData.length);
     }, [fetchdata])
 
-
     return (
-        <Wrapper className='table'>
+        <div>
+            <Wrapper className='table'>
             <Header map={map.current} number={scrollNumber}/>
             {loading && loadingItem}
             {error && errorItem}
             <div ref={allRef}>
                 {tableItem.length ? tableItem : noItem}
             </div>
-            <div className="mid" ref={midRef}>
+            <div style={{...windowSize, '--test': 'blue'}} className="mid" ref={midRef}>
                 <span style={{color: 'red', marginTop: '10px', display: "inline-block"}}> 滑动窗口:</span>
                 <span style={{color: 'red', fontWeight: 'bold'}}> {scrollNumber}</span>
             </div>
-        </Wrapper>
+            </Wrapper>
+        </div>
     )
 }
 
