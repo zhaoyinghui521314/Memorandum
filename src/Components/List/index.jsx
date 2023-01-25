@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { throttle } from 'lodash';
 import axios from "axios";
 import Wrapper from "../UI/Border";
 import Item from "../Item";
@@ -105,15 +106,15 @@ const useGetWindowSize = () => {
     const [windowSize, setWindowSize] = useState({
         '--color': 'pink'
     });
-    const handleWindowSize = (e) => {
+    const handleWindowSize = throttle((e) => {
         let htmlClientWidth = document.documentElement.clientWidth;
         // document.documentElement不包含滚动条, window.target.innerWidth包含滚动条
         console.log("ee:", e, e.target.innerWidth, e.target.innerHeight);
         setWindowSize({
             '--windowSize':  `${htmlClientWidth*0.9}px`,
             '--color': 'pink'
-        });
-    }
+    })}, 2000)
+
     useEffect(() => {
         window.addEventListener('resize', handleWindowSize);
         return () => {
@@ -131,21 +132,18 @@ const List = (props) => {
     const tableItem = data?.map((item, i) =>  {
         return (
             <div>
-                {i % 3 == 0  && <div key={i} ref={(node) => {
-                    console.log("node i:", node, i);
+                {i % 3 == 0  && <div key={`${i}123`} ref={(node) => {
                     if(node) {
                         map.current.set(i, node);
                     }else {
                         map.current.delete(i);
                     }
-                    console.log("node ok:", map);
                 }} className='time'>{name[i/3]}</div>}
                 <Item {...item} key={item.id} del={() => del(item.id)}/>
             </div>
         )
     });
     const noItem = <div style={{color: "Red", textAlign: "center"}}>暂时没有制定学习计划</div>
-    const loadingItem = <div>loading</div>;
     const errorItem =  <div>error</div>;
 
     const midRef = useRef(null);
@@ -179,7 +177,6 @@ const List = (props) => {
     return (
         <div>
             <Wrapper className='table'>
-                
                 <Header map={map.current} number={scrollNumber}/>
                 {loading && <Skelon />}
                 {error && errorItem}

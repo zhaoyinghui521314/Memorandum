@@ -22,7 +22,7 @@ const Header = (props) => {
     }
     const nameItem = name.map((_, index) => {
         return (
-                <li onClick={toggleHandle(index)} className='li'>
+                <li key={index} onClick={toggleHandle(index)} className='li'>
                     {name[index]}
                     <span key={index} className={`line ${line == index && 'lineShow'}`}></span>
                 </li>
