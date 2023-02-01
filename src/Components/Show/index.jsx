@@ -2,10 +2,10 @@ import Wrapper from '../UI/Border';
 import showImage from '../../Source/bizhi.jpg';
 import './index.css';
 
-const Show = () => {
+const Show = (props) => {
     return (
         <Wrapper className='show'>
-            <img src={showImage} alt="showImage" />
+            {props.context ? props.context() : <img src={showImage} alt="showImage" />}
         </Wrapper>
     )
 }

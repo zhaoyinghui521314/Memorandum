@@ -3,6 +3,7 @@ import Form from '../Form';
 import Clock from '../Clock';
 import Show from '../Show';
 import List from '../List';
+import Lantern from '../Lantern';
 import './index.css';
 import axios from '../../Api/request';
 import './index.css';
@@ -72,7 +73,7 @@ const Table = () => {
     }
     return (
         <div className='allWrapper'>
-            <Show />
+            <Show context={() => <Lantern />}/>
             <Clock isFixed={isFixed}/>
             <Form ref={formRef} isFixed={isFixed} id={id} add={add} />
             <List setId={setId}/>
