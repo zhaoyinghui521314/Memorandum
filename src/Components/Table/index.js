@@ -73,7 +73,10 @@ const Table = () => {
     }
     return (
         <div className='allWrapper'>
-            <Show context={() => <Lantern />}/>
+            {/* <Show context={() => <Lantern />}/> */}
+            <Show>
+                <Lantern />
+            </Show>
             <Clock isFixed={isFixed}/>
             <Form ref={formRef} isFixed={isFixed} id={id} add={add} />
             <List setId={setId}/>

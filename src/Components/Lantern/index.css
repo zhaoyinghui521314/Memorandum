@@ -1,4 +1,8 @@
-/* 整个坐标系原点在左上角，垂直屏幕向外为Z轴，沿屏幕向右方向为Y轴，沿屏幕方向向下为X轴。 */
+/* 
+    整个坐标系原点在左上角，垂直屏幕向外为Z轴，沿屏幕向右方向为X轴，沿屏幕方向向下为Y轴。
+    translate: 朝着轴指向的方向进行移动
+    rotate: 使用左手螺旋定律，大拇指指向轴指向的方向，四指指向的就是正向的方向
+*/
 .lantern {
     position: relative;
     width: 200px;
@@ -21,7 +25,7 @@
     height: 100%;
     background: #6d4861;
     transform-style: preserve-3d;
-    transform: rotateX(90deg) translateZ(100px); 
+    transform: rotateX(-90deg) translateZ(-100px); 
 }
 
 .lantern .top::after {
@@ -29,7 +33,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    transform: translateZ(-250px);
+    transform: translateZ(250px);
     filter: blur(20px);
     box-shadow: 0 0 50px 50px red;
 

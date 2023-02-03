@@ -5,7 +5,7 @@ import './index.css';
 const Show = (props) => {
     return (
         <Wrapper className='show'>
-            {props.context ? props.context() : <img src={showImage} alt="showImage" />}
+            {props.children ? props.children : <img src={showImage} alt="showImage" />}
         </Wrapper>
     )
 }
