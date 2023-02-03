@@ -6,6 +6,7 @@ import Item from "../Item";
 import Header from "../Header";
 import Skelon from "../Skelon";
 import './index.css';
+import Loading from "../Loading";
 
 /**
  * 封装查询的方式：包括加载、失败的状态
@@ -178,7 +179,12 @@ const List = (props) => {
         <div>
             <Wrapper className='table'>
                 <Header map={map.current} number={scrollNumber}/>
-                {loading && <Skelon />}
+                {loading && 
+                <div>
+                    <Loading />
+                    <Skelon />
+                </div>
+                }
                 {error && errorItem}
                 <div ref={allRef}>
                     {!loading && (tableItem.length ? tableItem : noItem)}

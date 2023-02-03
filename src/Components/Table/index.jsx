@@ -7,6 +7,7 @@ import Lantern from '../Lantern';
 import './index.css';
 import axios from '../../Api/request';
 import './index.css';
+import Loading from '../Loading';
 
 /**
  * 封装组件吸顶的方法
@@ -73,7 +74,7 @@ const Table = () => {
     }
     return (
         <div className='allWrapper'>
-            {/* <Show context={() => <Lantern />}/> */}
+            <Loading />
             <Show>
                 <Lantern />
             </Show>
