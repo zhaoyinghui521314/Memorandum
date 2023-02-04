@@ -74,7 +74,6 @@ const Table = () => {
     }
     return (
         <div className='allWrapper'>
-            <Loading />
             <Show>
                 <Lantern />
             </Show>
