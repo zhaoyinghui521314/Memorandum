@@ -1,35 +1,87 @@
 .Content {
-    position: relative;
-    flex: auto;
-    text-align: center;
+  position: relative;
+  flex: auto;
+  text-align: center;
 }
 .context {
-    font-weight: bold;
-    margin: 5px 0;
+  font-weight: bold;
+  margin: 5px 0;
 }
 .min {
-    font-size: 15px;
-    color: red;
+  font-size: 15px;
+  color: red;
 }
 .btn {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 15px;
-    right: 15px;
-    font-size: 30px;
-    line-height: 23px;
-    border-radius: 50%;
-    rotate: 45deg;
-    background-color: rgb(214, 216, 217);
-    cursor: pointer;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 15px;
+  right: 15px;
+  font-size: 30px;
+  line-height: 23px;
+  border-radius: 50%;
+  rotate: 45deg;
+  background-color: rgb(214, 216, 217);
+  cursor: pointer;
 }
 .btn:hover {
-    color: red;
+  color: red;
 }
 .btn:focus {
-    background-color: yellow;
+  background-color: yellow;
 }
 .btn:active {
-    background-color: rgb(80, 141, 188);
+  background-color: rgb(80, 141, 188);
+}
+
+input[type="checkbox"] {
+  /* visibility: hidden; */
+  appearance: none;
+  position: relative;
+  cursor: pointer;
+}
+input[type="checkbox"]::before {
+  position: absolute;
+  content: "";
+  width: 15px;
+  height: 15px;
+  top: -12px;
+  left: -22px;
+  border-radius: 50%;
+  border: 2px solid black;
+  transition: all 0.3s;
+}
+input[type="checkbox"]:checked::before {
+  position: absolute;
+  content: "";
+  width: 12px;
+  height: 20px;
+  top: -16px;
+  left: -25px;
+  border-radius: 0;
+  border: 2px solid red;
+  border-top: none;
+  border-left: none;
+  transform: rotateZ(45deg);
+  transition: all 0.3s;
+}
+input[type="checkbox"]:checked ~ span {
+  text-underline-offset: -8px;
+  text-decoration-color: blueviolet;
+  text-decoration-line: line-through;
+  text-decoration-thickness: 3px;
+  transition: all 0.3s;
+  color: red;
+}
+.text {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  z-index: 1;
+}
+.text:hover {
+  text-underline-offset: 5px;
+  color: rgb(69, 23, 107);
+  text-decoration-color: rgb(69, 23, 107);
+  transition: all 0.3s;
 }
