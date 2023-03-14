@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <!-- 防盗链: 浏览器在访问图片地址时会自动在请求上添加了refre字段，而有些网站服务器针对refre做了防盗链设计就返回了403,自然就无法展示。-->
+    <meta name="referrer" content="no-referrer" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script>
-        // 无需引入react, react-dom, babel， js中使用import引入即可
-        // div创建根节点id=root, 作为模版html，webpack构建使用找到根节点
+      // 无需引入react, react-dom, babel， js中使用import引入即可
+      // div创建根节点id=root, 作为模版html，webpack构建使用找到根节点
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="root"></div>
     <div id="portal"></div>
-</body>
+  </body>
 </html>
